@@ -1,0 +1,11 @@
+graph TD;
+    A[User] --> B{User Interacts}
+    B --> C{SPA Sends POST}
+    C --> |POST https://studies.cs.helsinki.fi/exampleapp/new_note| D[Server]
+    D --> E{Server Processes Note}
+    E --> F{Server Updates Data}
+    F --> |200 OK| D
+    D --> G{Server Sends Response}
+    G --> |Confirmation| C
+    C --> H{SPA Updates UI}
+    H --> I{User Sees Updated Notes}
