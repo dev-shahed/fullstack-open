@@ -1,0 +1,21 @@
+sequenceDiagram
+    participant A as User
+    participant B as Browser
+    participant C as Server
+
+    Note over A: User accesses SPA
+    A ->> B: Accesses SPA
+    B ->> C: Requests SPA
+    Note over C: Server processes<br/>request for SPA
+    C ->> B: Sends SPA (HTML, CSS, JS)
+    Note over B: Browser receives and<br/>loads SPA resources
+    B ->> A: SPA Loaded
+    Note over A: User interacts with SPA<br/>(e.g., views notes)
+    A ->> B: User Interacts
+    B ->> C: Requests data.json
+    Note over C: Server fetches<br/>and sends data.json
+    C ->> B: Sends JSON Data
+    Note over B: Browser updates SPA<br/>with fetched notes
+    B ->> A: SPA Displays Notes
+    Note over A: User continues to<br/>interact with SPA
+    A ->> B: User Interacts
