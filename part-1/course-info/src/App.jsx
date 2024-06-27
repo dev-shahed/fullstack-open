@@ -1,7 +1,5 @@
-import { Fragment} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Fragment } from 'react';
+import './App.css';
 
 
 export function Header(props) {
@@ -13,18 +11,19 @@ export function Header(props) {
 }
 
 export function Content(props) {
+  const content = props.parts;
   return (
     <Fragment>
-         <p>{props.content.part1} {props.content.exercises1}</p>
-         <p>{props.content.part2} {props.content.exercises2}</p>
-         <p>{props.content.part3} {props.content.exercises3}</p>
+         <p>{content.part1.name} {content.part1.exercises}</p>
+         <p>{content.part2.name} {content.part3.exercises}</p>
+         <p>{content.part3.name} {content.part3.exercises}</p>
     </Fragment>
   )
 }
 
 export function Total(props){
-  const { exercises1, exercises2, exercises3 } = props.exercises;
-  const total = exercises1 + exercises2 + exercises3;
+  const parts = props.total;
+  const total = parts.part1.exercises + parts.part2.exercises + parts.part3.exercises;
   return (
     <Fragment>
          <p>Number of exercises {total}</p>
@@ -35,18 +34,24 @@ export function Total(props){
 
 const App = () => {
   const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
+  const part1 = {
+    name: 'Fundamentals of React',
+    exercises: 10
+  }
+  const part2 = {
+    name: 'Using props to pass data',
+    exercises: 7
+  }
+  const part3 = {
+    name: 'State of a component',
+    exercises: 14
+  }
 
   return (
     <div>
       <Header course={course}/>
-      <Content content={{part1, part2, part3, exercises1, exercises2, exercises3}}/>
-      <Total exercises = {{exercises1, exercises2, exercises3}} />
+      <Content parts={{part1, part2, part3}}/>
+      <Total total={{part1, part2, part3}}/>
     </div>
   )
 }
