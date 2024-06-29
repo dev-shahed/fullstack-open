@@ -1,59 +1,69 @@
-import { Fragment } from 'react';
-import './App.css';
-
+import { Fragment } from "react";
+import "./App.css";
 
 export function Header(props) {
   return (
     <Fragment>
-         <h1>{props.course}</h1>
+      <h1>{props.course}</h1>
     </Fragment>
-  )
+  );
 }
 
 export function Content(props) {
-  const content = props.parts;
+  const contents = props.parts;
+  if (contents.length === 0) {
+    return <p>No course parts available</p>;
+  }
   return (
     <Fragment>
-         <p>{content.part1.name} {content.part1.exercises}</p>
-         <p>{content.part2.name} {content.part3.exercises}</p>
-         <p>{content.part3.name} {content.part3.exercises}</p>
+      {contents.map((part, index) => (
+        <p key={index}>
+          {part.name} {part.exercises}
+        </p>
+      ))}
     </Fragment>
-  )
+  );
 }
 
-export function Total(props){
-  const parts = props.total;
-  const total = parts.part1.exercises + parts.part2.exercises + parts.part3.exercises;
+export function Total(props) {
+  const parts = props.parts;
+  if (parts.length === 0) {
+    return <p>No course exercises available</p>;
+  }
   return (
     <Fragment>
-         <p>Number of exercises {total}</p>
+      <p>
+        Number of exercises
+        {' ' + parts.reduce((sum, part) => sum + part.exercises, 0)}
+      </p>
     </Fragment>
-  )
+  );
 }
-
 
 const App = () => {
-  const course = 'Half Stack application development'
-  const part1 = {
-    name: 'Fundamentals of React',
-    exercises: 10
-  }
-  const part2 = {
-    name: 'Using props to pass data',
-    exercises: 7
-  }
-  const part3 = {
-    name: 'State of a component',
-    exercises: 14
-  }
+  const course = "Half Stack application development";
+  const parts = [
+    {
+      name: "Fundamentals of React",
+      exercises: 10,
+    },
+    {
+      name: "Using props to pass data",
+      exercises: 7,
+    },
+    {
+      name: "State of a component",
+      exercises: 14,
+    },
+  ];
 
   return (
     <div>
-      <Header course={course}/>
-      <Content parts={{part1, part2, part3}}/>
-      <Total total={{part1, part2, part3}}/>
+      <Header course={course} />
+      <Content parts={parts} />
+      <Total parts={parts} />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
