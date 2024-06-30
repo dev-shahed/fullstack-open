@@ -36,6 +36,7 @@ const MostVotes = ({ anecdotes, voteCount }) => {
       <p>Has {highestVote} vote</p>
     </Fragment>
   );
+
 };
 const App = () => {
   const anecdotes = [
