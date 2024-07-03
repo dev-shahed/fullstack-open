@@ -20,7 +20,7 @@ const update = async (id, newObject) => {
 };
 
 const deleteById = async (id) => {
-  const request = axios.delete(`${baseUrl}/${id}}`);
+  const request = axios.delete(`${baseUrl}/${id}`);
   const response = await request;
   return response.data;
 };

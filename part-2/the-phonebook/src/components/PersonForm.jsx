@@ -33,9 +33,27 @@ export default function PersonForm({ persons, setPersons }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const nameExists = persons.some((person) => person.name === newName);
-    if (nameExists) {
-      alert(`${newName} is already added to phonebook`);
+    const personExists = persons.find((person) => person.name === newName);
+
+    if (personExists) {
+      if (
+        window.confirm(
+          `${newName} is already added to phonebook, replace the old number with a new one?`
+        )
+      ) {
+        const updateNumber = { ...personExists, number: newNumber };
+        personService
+          .update(personExists.id, updateNumber)
+          .then((returnedPerson) => {
+            setPersons(
+              persons.map((person) =>
+                person.id !== personExists.id ? person : returnedPerson
+              )
+            );
+            setNewName("");
+            setNewNumber("");
+          });
+      }
     } else {
       const personObj = { name: newName, number: newNumber };
       personService.create(personObj).then((resObj) => {
