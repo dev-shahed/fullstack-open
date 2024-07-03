@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import personService from "../services/persons";
 
 const PersonInput = ({ text, value, onChange, type }) => {
   return (
@@ -36,12 +37,12 @@ export default function PersonForm({ persons, setPersons }) {
     if (nameExists) {
       alert(`${newName} is already added to phonebook`);
     } else {
-      setPersons((persons) => [
-        ...persons,
-        { name: newName, number: newNumber },
-      ]);
-      setNewName("");
-      setNewNumber("");
+      const personObj = { name: newName, number: newNumber };
+      personService.create(personObj).then((resObj) => {
+        setPersons(persons.concat(resObj));
+        setNewName("");
+        setNewNumber("");
+      });
     }
   };
 

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 export default function Persons({ persons, filterData }) {
   const filteredPerson = persons.filter((person) =>
-    person.name.toLowerCase().includes(filterData.toLowerCase())
+    person.name?.toLowerCase().includes(filterData.toLowerCase())
   );
 
   return (
