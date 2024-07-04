@@ -1,41 +1,6 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "4343434",
-      "id": "1"
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "1234567",
-      "id": "2"
-    },
-    {
-      "name": "Grace Hopper",
-      "number": "2345678",
-      "id": "3"
-    },
-    {
-      "name": "Edsger Dijkstra",
-      "number": "3456789",
-      "id": "4"
-    },
-    {
-      "name": "Alan Turing",
-      "number": "4567890",
-      "id": "5"
-    },
-    {
-      "name": "Donald Knuth",
-      "number": "5678901",
-      "id": "6"
-    },
-    {
-      "name": "Linus Torvalds",
-      "number": "6789012",
-      "id": "7"
-    },
-    {
       "name": "Tim Berners-Lee",
       "number": "7890123",
       "id": "8"

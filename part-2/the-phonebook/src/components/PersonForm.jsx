@@ -19,7 +19,7 @@ const PersonInput = ({ text, value, onChange, type }) => {
   );
 };
 
-export default function PersonForm({ persons, setPersons }) {
+export default function PersonForm({ persons, setPersons, setErrorMessage }) {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
 
@@ -58,6 +58,13 @@ export default function PersonForm({ persons, setPersons }) {
       const personObj = { name: newName, number: newNumber };
       personService.create(personObj).then((resObj) => {
         setPersons(persons.concat(resObj));
+        setErrorMessage({
+          message: `${newName} has been added`,
+          status: "success",
+        });
+        setTimeout(() => {
+          setErrorMessage({ message: null, status: "" });
+        }, 5000);
         setNewName("");
         setNewNumber("");
       });

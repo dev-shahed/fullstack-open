@@ -1,25 +1,29 @@
 import React, { Fragment } from "react";
 import personService from "../services/persons";
 
-export default function Persons({ persons, filterData, setPersons }) {
+export default function Persons({ persons, filterData, setPersons, setErrorMessage }) {
   const filteredPerson = persons.filter((person) =>
     person.name?.toLowerCase().includes(filterData.toLowerCase())
   );
   const handleDelete = (id) => {
-    if (
-      window.confirm(
-        `Delete ${persons.find((person) => person.id === id).name}`
-      )
-    ) {
+    const thePerson = persons.find((person) => person.id === id).name;
+    if (window.confirm(`Delete ${thePerson}`)) {
       personService
         .deleteById(id)
         .then(() => {
           const newPersons = persons.filter((person) => person.id !== id);
           setPersons(newPersons);
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch(() =>
+          setErrorMessage({
+            message: `Information of ${thePerson} has already been removed from the server`,
+            status: "error",
+          })
+        );
+      setTimeout(() => {
+        setErrorMessage({ message: null, status: "" });
+      }, 5000);
+      setPersons(persons.filter((person) => person.id !== id));
     }
   };
 
