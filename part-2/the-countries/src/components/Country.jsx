@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import Weather from "./Weather";
 
 export default function Country({ country }) {
   return (
@@ -13,6 +14,7 @@ export default function Country({ country }) {
         ))}
       </ul>
       <img src={country.flags.png} alt={country.flags.alt} />
+      <Weather capital={country.capital} latlng={country.latlng} />
     </Fragment>
   );
 }
