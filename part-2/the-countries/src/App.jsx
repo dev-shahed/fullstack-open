@@ -6,6 +6,7 @@ import countryService from "./services/countries";
 function App() {
   const [countries, setCountries] = useState([]);
   const [value, setValue] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   // Filtered countries based on the search query
   const filteredCountries = countries.filter((item) =>
@@ -23,6 +24,10 @@ function App() {
       });
   }, []);
 
+  const handleShowClick = (country) => {
+    setSelectedCountry(country);
+  };
+
   return (
     <Fragment>
       <span>Find countries: </span>
@@ -38,11 +43,15 @@ function App() {
           <Country country={filteredCountries[0]} />
         ) : (
           filteredCountries.map((country) => (
-            <div key={country?.ccn3}>
-              <h3>{country.name.common}</h3>
+            <div key={country.ccn3}>
+              <span>{country.name.common}</span>
+              <button onClick={() => handleShowClick(country)}>show</button>
             </div>
           ))
         ))}
+      {selectedCountry && filteredCountries.length !== 1 && (
+        <Country country={selectedCountry} />
+      )}
     </Fragment>
   );
 }
