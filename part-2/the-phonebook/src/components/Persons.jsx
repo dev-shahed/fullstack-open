@@ -5,6 +5,7 @@ export default function Persons({ persons, filterData, setPersons, setErrorMessa
   const filteredPerson = persons.filter((person) =>
     person.name?.toLowerCase().includes(filterData.toLowerCase())
   );
+
   const handleDelete = (id) => {
     const thePerson = persons.find((person) => person.id === id).name;
     if (window.confirm(`Delete ${thePerson}`)) {

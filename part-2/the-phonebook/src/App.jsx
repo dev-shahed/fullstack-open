@@ -17,7 +17,9 @@ const App = () => {
   useEffect(() => {
     personService
       .getAll()
-      .then((persons) => setPersons(persons))
+      .then((persons) => {
+        setPersons(persons);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -28,7 +30,7 @@ const App = () => {
       </div>
     );
   }
-
+  
   return (
     <div>
       <h2>Phonebook</h2>

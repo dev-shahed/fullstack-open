@@ -8,6 +8,7 @@ const PersonInput = ({ text, value, onChange, type }) => {
       value={value}
       onChange={onChange}
       type={type}
+      required
       style={{
         padding: "5px",
         borderRadius: "5px",
@@ -31,7 +32,7 @@ export default function PersonForm({ persons, setPersons, setErrorMessage }) {
     setNewNumber(event.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const personExists = persons.find((person) => person.name === newName);
 
@@ -42,7 +43,7 @@ export default function PersonForm({ persons, setPersons, setErrorMessage }) {
         )
       ) {
         const updateNumber = { ...personExists, number: newNumber };
-        personService
+        await personService
           .update(personExists.id, updateNumber)
           .then((returnedPerson) => {
             setPersons(
@@ -56,18 +57,29 @@ export default function PersonForm({ persons, setPersons, setErrorMessage }) {
       }
     } else {
       const personObj = { name: newName, number: newNumber };
-      personService.create(personObj).then((resObj) => {
-        setPersons(persons.concat(resObj));
-        setErrorMessage({
-          message: `${newName} has been added`,
-          status: "success",
+      await personService
+        .create(personObj)
+        .then((resObj) => {
+          setPersons(persons.concat(resObj));
+          setErrorMessage({
+            message: `${newName} has been added`,
+            status: "success",
+          });
+          setTimeout(() => {
+            setErrorMessage({ message: null, status: "" });
+          }, 5000);
+          setNewName("");
+          setNewNumber("");
+        })
+        .catch((error) => {
+          setErrorMessage({
+            message: error.response.data.error,
+            status: "error",
+          });
+          setTimeout(() => {
+            setErrorMessage({ message: null, status: "" });
+          }, 5000);
         });
-        setTimeout(() => {
-          setErrorMessage({ message: null, status: "" });
-        }, 5000);
-        setNewName("");
-        setNewNumber("");
-      });
     }
   };
 
@@ -89,7 +101,7 @@ export default function PersonForm({ persons, setPersons, setErrorMessage }) {
             text={"number"}
             value={newNumber}
             onChange={handleNumberChange}
-            type="number"
+            type="text"
           />
         </div>
         <div>
