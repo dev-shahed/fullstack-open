@@ -6,12 +6,12 @@ const nonExistingId = async () => {
   await person.deleteOne()
 
   return person._id.toString()
-};
+}
 
 const personsInDb = async () => {
   const persons = await Person.find({})
   return persons.map((person) => person.toJSON())
-};
+}
 
 module.exports = {
   nonExistingId,
