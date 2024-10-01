@@ -1,16 +1,18 @@
-import PropTypes from 'prop-types';
 import { Fragment } from 'react';
+import { useSelector } from 'react-redux';
+import AnecdoteList from './AnecdoteList';
 
-export default function Anecdotes({ text, count }) {
-  Anecdotes.propTypes = {
-    text: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-  };
-
+export default function Anecdotes() {
+  const anecdotes = useSelector((state) => state || []);
   return (
     <Fragment>
-      <h4>{text}</h4>
-      <h5>Has {count} votes</h5>
+      {anecdotes.length > 0 ? (
+        anecdotes.map((anecdote) => (
+          <AnecdoteList key={anecdote.id} anecdote={anecdote} />
+        ))
+      ) : (
+        <p>No anecdotes available..</p>
+      )}
     </Fragment>
   );
 }

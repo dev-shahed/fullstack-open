@@ -1,16 +1,31 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
+import { useDispatch } from 'react-redux';
+import { voteAnecdote } from '../../reducers/anecdoteReducer';
+import Button from './Button';
 
 export default function AnecdoteList({ anecdote }) {
-  console.log(anecdote);
+  const dispatch = useDispatch();
+
+  const handleVote = (id) => {
+    dispatch(voteAnecdote(id));
+  };
+
   return (
     <Fragment>
-      <h4>{anecdote.content}</h4>
-      <h4>{anecdote.votes}</h4>
+      <div>{anecdote.content}</div>
+      <div>
+        Has {anecdote.votes}
+        <Button event={() => handleVote(anecdote.id)} text="Vote" />
+      </div>
     </Fragment>
   );
 }
 
 AnecdoteList.propTypes = {
-  anecdote: PropTypes.object.isRequired,
+  anecdote: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired,
 };
