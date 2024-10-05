@@ -12,9 +12,40 @@ export default function AnecdoteForm() {
   };
   return (
     <Fragment>
-      <form onSubmit={handleSubmit}>
-        <input name="content" />
-        <button type="submit">create</button>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '10px',
+          width: '300px',
+          margin: '0 auto',
+        }}
+      >
+        <input
+          name="content"
+          style={{
+            padding: '8px',
+            fontSize: '16px',
+            borderRadius: '4px',
+            border: '1px solid #ccc',
+          }}
+          placeholder="Enter content"
+        />
+        <button
+          type="submit"
+          style={{
+            backgroundColor: 'blue',
+            color: 'white',
+            padding: '10px 20px',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontSize: '16px',
+          }}
+        >
+          Create
+        </button>
       </form>
     </Fragment>
   );
