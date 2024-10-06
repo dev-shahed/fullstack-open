@@ -11,7 +11,7 @@ export default function AnecdoteList({ anecdote }) {
   };
 
   return (
-    <div>
+    <div style={{ margin: "20px" }}>
       <span>{anecdote.content} </span>
       <span>
         Has {anecdote.votes}
