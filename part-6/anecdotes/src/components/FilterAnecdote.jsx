@@ -17,7 +17,7 @@ export default function FilterAnecdote() {
     if (state.filter === 'ALL') {
       return sortByVotes(anecdotes); 
     }
-    // Filter based on query string and then sort by votes
+    // Filter based on query string and then sort by votes..
     const filteredAnecdotes = anecdotes.filter((item) =>
       item.content.toLowerCase().includes(state.filter.toLowerCase())
     );
