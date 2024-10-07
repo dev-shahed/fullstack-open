@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterChange } from '../../reducers/filterReducer';
 import AnecdoteList from './AnecdoteList';
@@ -51,11 +50,3 @@ export default function FilterAnecdote() {
   );
 }
 
-FilterAnecdote.propTypes = {
-  anecdotes: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      content: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};

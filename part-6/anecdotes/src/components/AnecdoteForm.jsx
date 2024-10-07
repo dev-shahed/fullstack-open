@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import { createAnecdote } from '../../reducers/anecdoteReducer';
+import { setNotificationInterval } from '../../reducers/notificationReducer';
 
 export default function AnecdoteForm() {
   const dispatch = useDispatch();
@@ -9,6 +10,7 @@ export default function AnecdoteForm() {
     const content = e.target.content.value;
     e.target.content.value = '';
     dispatch(createAnecdote(content));
+    dispatch(setNotificationInterval(`You added '${content}'`));
   };
   return (
     <Fragment>
